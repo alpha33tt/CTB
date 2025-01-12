@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Coin Flash Wallet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Set the background color to black */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white; /* Set text color to white for contrast */
+        }
+
+        .container {
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 400px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #9C2A2A;
+            font-size: 2rem;
+        }
+
+        h2 {
+            color: #4D4D4D;
+            font-size: 1.5rem;
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn-submit {
+            background-color: #9C2A2A;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #B53A3A;
+        }
+
+        select {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fake Coin Flash Wallet</h1>
+
+        <!-- Flash Coin Form -->
+        <form action="/flash" method="POST">
+            <div class="form-group">
+                <label for="wallet_address">Wallet Address:</label>
+                <input type="text" id="wallet_address" name="wallet_address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exchange">Exchange:</label>
+                <select id="exchange" name="exchange" required>
+                    <option value="binance">Binance</option>
+                    <option value="bybit">Bybit</option>
+                    <option value="trustwallet">TrustWallet</option>
+                    <option value="coinbase">Coinbase</option>
+                    <option value="exodus">Exodus</option>
+                    <option value="luno">Luno</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="currency">Currency:</label>
+                <select id="currency" name="currency" required>
+                    <option value="BTC">BTC</option>
+                    <option value="ETH">ETH</option>
+                    <option value="USDT">USDT</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-submit">Send Fake Coin</button>
+        </form>
+
+        <h2>Modify Wallet Balance</h2>
+
+        <!-- Modify Balance Form -->
+        <form action="/modify_balance" method="POST">
+            <div class="form-group">
+                <label for="exchange_modify">Exchange:</label>
+                <select id="exchange_modify" name="exchange" required>
+                    <option value="binance">Binance</option>
+                    <option value="bybit">Bybit</option>
+                    <option value="trustwallet">TrustWallet</option>
+                    <option value="coinbase">Coinbase</option>
+                    <option value="exodus">Exodus</option>
+                    <option value="luno">Luno</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="currency_modify">Currency:</label>
+                <select id="currency_modify" name="currency" required>
+                    <option value="BTC">BTC</option>
+                    <option value="ETH">ETH</option>
+                    <option value="USDT">USDT</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="amount_modify">Amount:</label>
+                <input type="number" id="amount_modify" name="amount" step="0.01" required>
+            </div>
+
+            <button type="submit" class="btn-submit">Modify Balance</button>
+        </form>
+    </div>
+</body>
+</html>
