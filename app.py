@@ -15,10 +15,12 @@ def create_db():
     c = conn.cursor()
     c.execute('''
         CREATE TABLE IF NOT EXISTS wallets (
-            address TEXT PRIMARY KEY, 
+            address TEXT NOT NULL, 
             exchange TEXT NOT NULL, 
             currency TEXT NOT NULL, 
-            balance REAL NOT NULL DEFAULT 0.0
+            balance REAL NOT NULL DEFAULT 0.0,
+            PRIMARY KEY (address),
+            UNIQUE (address, exchange, currency)  -- Added this UNIQUE constraint
         )
     ''')
     conn.commit()
