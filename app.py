@@ -51,17 +51,31 @@ def flash_wallet():
     # Insert or update the wallet in the database
     conn = get_db_connection()
     c = conn.cursor()
+
+    # Check if the wallet already exists in the database
     c.execute('''
-        INSERT INTO wallets (address, exchange, currency, balance) 
-        VALUES (?, ?, ?, ?)
-        ON CONFLICT(address, exchange, currency) 
-        DO UPDATE SET balance = balance + ?
-    ''', (wallet_address, exchange, currency, 0.0, amount))
+        SELECT balance FROM wallets WHERE address = ? AND exchange = ? AND currency = ?
+    ''', (wallet_address, exchange, currency))
+    result = c.fetchone()
+
+    if result:
+        # If the wallet exists, update the balance
+        new_balance = result['balance'] + amount
+        c.execute('''
+            UPDATE wallets SET balance = ? WHERE address = ? AND exchange = ? AND currency = ?
+        ''', (new_balance, wallet_address, exchange, currency))
+    else:
+        # If the wallet does not exist, insert a new record
+        c.execute('''
+            INSERT INTO wallets (address, exchange, currency, balance) 
+            VALUES (?, ?, ?, ?)
+        ''', (wallet_address, exchange, currency, amount))
+
     conn.commit()
     conn.close()
 
     # Return the updated balance
-    return f'Fake {currency} flashed successfully. New balance will be updated in the database.'
+    return f'Fake {currency} flashed successfully. New balance is now {amount} added.'
 
 @app.route('/balance', methods=['GET'])
 def get_balance():
